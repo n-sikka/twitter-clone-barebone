@@ -10,7 +10,7 @@
 				var vm = this;
 
 				vm.currentUserId = localStorage.getItem('token');
-
+        vm.currentUser = JSON.parse(localStorage.getItem('user'));
 				vm.getUser = function(){
 						$http.get('api/users/get')
 									  .then(function success(response) {

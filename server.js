@@ -52,7 +52,7 @@ app.post('/api/profile/updateBio', profileController.updateBio);
 
 //Bitch
 app.post('/api/bitch/post', bitchController.postBitch);
-app.get('/api/bitch/get', bitchController.getBitches);
+app.post('/api/bitch/get', bitchController.getBitches);
 
 //user
 app.get('/api/users/get', usersController.getUsers)
