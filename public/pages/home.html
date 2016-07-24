@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="container">
+    <div class="col-md-12">
+      <div class="container-fluid text-center">
+
+        <div>
+          <div ng-if="!vm.isAuth" class="jumbotron">
+            <h1>Hello! Welcome to TimeSuck</h1>
+            <h3>We essentially suck your time</h3><br><br>
+            <h5>Please Sign Up or Login to continue</h5>
+            <button class="btn btn-default" ui-sref="signup">Signup</button>
+
+          </div>
+
+          <div class="row-fluid" ng-if="vm.isAuth" >
+            <div class="col-md-12 text-center">
+              <h3>Welcome to TimeSuck, <b>{{vm.user}}</b>!</h3>
+              <h5><i>Here, You can Bitch freely.</i></h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="row-fluid">
+          <div ng-if="vm.isAuth" ng-init="vm.getBitches(true)">
+            <div class="col-md-12 well text-center">
+              <textarea  rows="2" cols="40"
+                         ng-model="vm.newBitch"
+                         ng-keypress="vm.sendBitch($event, vm.newBitch)"
+                         class="form-control"
+                         placeholder="Bitch about something..(and press enter)">
+              </textarea>
+            </div>
+            <div class="row" ng-if="vm.newBitches">
+              <a href ng-click="vm.updateBitches()">There are {{vm.difference}} new bitches!</a>
+            </div>
+            <div class="col-md-12 text-center" ng-repeat="bitch in vm.bitches | orderBy: '-date'">
+              <p>
+                {{bitch.content}} - {{bitch.date | date: 'MM/dd/yyyy hh:mm'}}
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

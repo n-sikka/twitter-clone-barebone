@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="timesuck">
+
+	<head>
+		<title>TimeSuck</title>
+		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+	</head>
+
+	<body>
+		<nav class="navbar navbar-default" ng-controller="AuthController as vm">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#responsive" aria-expanded="false">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#">Time Suck</a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="responsive" ng-init="vm.isAuth()">
+					<div ng-if="!vm.isAuth">
+						<form class="navbar-form navbar-right">
+							<input class="form-control" type="email" ng-model="user.email"/>
+							<input class="form-control" type="password" ng-model="user.password">
+							<button class="btn btn-primary" ng-click="vm.loginUser(user)">Login</button>
+						</form>
+
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href ui-sref="signup">Sign Up</a></li>
+						</ul>
+					</div>
+					<div ng-if="vm.isAuth">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href ui-sref="find">Explore</a></li>
+							<li><a href ui-sref="editProfile">Edit Profile</a></li>
+							<li ng-click="vm.logout()"><a href>Logout</a></li>
+							<!-- <li class="dropdown">
+			          <a class="dropdown-toggle" data-toggle="dropdown" role="button">User <span class="caret"></span></a>
+			          <ul class="dropdown-menu">
+			          </ul>
+			        </li> -->
+						</ul>
+					</div>
+
+		    </div><!-- /.navbar-collapse -->
+		  </div><!-- /.container-fluid -->
+		</nav>
+
+
+		<div ui-view></div>
+
+		<!-- WARNING: Do not change order! -->
+		<script src="node_modules/jquery/dist/jquery.js"></script>
+		<script src="node_modules/angular/angular.js"></script>
+	  <script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+		<script src="node_modules/ng-file-upload/dist/ng-file-upload-shim.js"></script>
+		<script src="node_modules/ng-file-upload/dist/ng-file-upload.js"></script>
+		<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+		<script src="public/app.js"></script>
+
+		<!-- controllers and services -->
+		<script src="public/signup/signup.controller.js"></script>
+		<script src="public/pages/home.controller.js"></script>
+		<script src="public/auth/auth.controller.js"></script>
+		<script src="public/user/profile/profile.controller.js"></script>
+		<script src="public/pages/follow/find.controller.js"></script>
+	</body>
+
+</html>

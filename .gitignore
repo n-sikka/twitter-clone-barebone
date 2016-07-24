@@ -1,0 +1,8 @@
+.tmp/
+*~
+*.swp
+.DS_Store
+node_modules/
+coverage/
+.sass-cache/
+.idea/
