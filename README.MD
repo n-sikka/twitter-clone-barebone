@@ -3,4 +3,4 @@
 
 ### Runs on localhost:3000
 
-### type 'node server' to start server
+(type 'node server' to start.)
