@@ -27,7 +27,7 @@
               localStorage.setItem('token', response.data._id);
               localStorage.setItem('email', response.data.email);
               localStorage.setItem('user-image', response.data.image);
-              	zvar name = response.data.email.substring(0, response.data.email.lastIndexOf("@"));
+              var name = response.data.email.substring(0, response.data.email.lastIndexOf("@"));
               localStorage.setItem('username', name);
               location.reload();
            }, function error(response){
@@ -36,7 +36,7 @@
 
     }
 
-    vm.logout = function	z
+    vm.logout = function(){
       localStorage.clear();
       location.reload();
     }

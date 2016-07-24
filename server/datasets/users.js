@@ -11,11 +11,13 @@ var userSchema = new Schema({
   image: String,
   following: [
               {
+                _id : false,
 								userId: String
 							}
             ],
   followers: [
               {
+                _id : false,
 								userId: String
 							}
             ]

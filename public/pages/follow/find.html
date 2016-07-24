@@ -1,10 +1,15 @@
 <div class="jumbotron" ng-init="vm.getUser()">
 	<div class="row">
 		<div class="container">
-			<div class="col-md-6" ng-repeat="user in vm.users" ng-show="vm.currentUserId != user.slug">
+			<div class="col-md-6" ng-repeat="user in vm.users" ng-if="user.uid != vm.currentUserId">
 				<h3>
 					{{user.name}}
-					<button ng-click="vm.follow(user.slug)">Follow</button>
+					<button ng-click="vm.follow(user.uid)"  ng-if="!user.isFollowed">
+						{{vm.followed}}
+						<div>
+							Follow
+						</div>
+					</button>
 				</h3>
 			</div>
 		</div>
