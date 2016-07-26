@@ -57,6 +57,7 @@ app.post('/api/bitch/get', bitchController.getBitches);
 //user
 app.get('/api/users/get', usersController.getUsers)
 app.post('/api/users/follow', usersController.followUser)
+app.post('/api/users/unfollow', usersController.unfollowUser)
 
 
 // catch 404 and forward to error handler

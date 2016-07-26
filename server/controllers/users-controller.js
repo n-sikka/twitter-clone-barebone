@@ -14,7 +14,6 @@ module.exports.followUser = function(req, res) {
 		var userId = req.body.user;
 		var targetId = req.body.targetUser;
 
-//		console.log(targetId + ' is now being followed by ' + userId);
 
 		User.findById(targetId, function(err, target){
 				if(err) {
@@ -42,6 +41,36 @@ module.exports.followUser = function(req, res) {
             })
 				}
 		})
+
+    User.find({}, function(err, users){
+      if(err) {
+        console.log(err);
+      }else {
+        res.json(users)
+      }
+    })
+}
+
+module.exports.unfollowUser = function(req, res) {
+		var userId = req.body.user;
+		var targetId = req.body.targetUser;
+
+    User.findByIdAndUpdate(targetId, {
+        $pull: {followers: {
+            userId: userId
+        }}
+    }, function(err) {
+        console.log(err);
+    });
+
+
+    User.findByIdAndUpdate(userId, {
+        $pull: {following: {
+            userId: targetId
+        }}
+    }, function(err) {
+        console.log(err);
+    });
 
     User.find({}, function(err, users){
       if(err) {

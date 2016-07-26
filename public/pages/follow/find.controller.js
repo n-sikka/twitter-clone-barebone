@@ -10,7 +10,8 @@
 				var vm = this;
 
 				vm.currentUserId = localStorage.getItem('token');
-        vm.currentUser = JSON.parse(localStorage.getItem('user'));
+        // vm.currentUser = JSON.parse(localStorage.getItem('user'));
+
 				vm.getUser = function(){
 						$http.get('api/users/get')
 									  .then(function success(response) {
@@ -29,6 +30,22 @@
             $http.post('api/users/follow', request)
                   .then(function success(response){
                     vm.users = createDataset(response.data);
+                  },function error(response){
+                    console.log(response.statusText)
+                  })
+            $state.reload();
+        }
+
+        vm.unfollow = function(id){
+            var request = {
+                user: vm.currentUserId,
+                targetUser: id
+            }
+
+            $http.post('api/users/unfollow', request)
+                  .then(function success(response){
+                    vm.users = createDataset(response.data);
+                    console.log(response.data);
                     $state.reload();
                   },function error(response){
                     console.log(response.statusText)
@@ -37,14 +54,21 @@
 
 				function createDataset(arr) {
 						var temp = [];
+            vm.thisUser;
 
-						for(var i=0; i<arr.length; i++){
+            for(var i=0; i<arr.length; i++){
+              // console.log(arr[i].email);
+
 
                 if(arr[i]._id == vm.currentUserId){
 
-                  vm.currentUser = arr[i];
+                  var obj = JSON.stringify(arr[i]);
+                  localStorage.setItem('user', obj);
+
+                  // console.log(vm.thisUser);
 
                 }
+
 
                 var followFlag = isFollowed(arr[i]._id);
 
@@ -52,6 +76,7 @@
                   name : arr[i].email.substring(0, arr[i].email.lastIndexOf("@")),
                   uid : arr[i]._id,
                   following : arr[i].following,
+                  followers : arr[i].followers,
                   isFollowed : followFlag
                 }
 
@@ -64,8 +89,9 @@
 
 
         function isFollowed(id){
+          var currentUser = JSON.parse(localStorage.getItem('user'));
 
-          var arr = vm.currentUser.following;
+          var arr = currentUser.following;
           var followed;
 
           arr.forEach(function(item){
@@ -76,7 +102,7 @@
 
           })
 
-          if(followed === 'undefined'){
+          if(!angular.isDefined(followed)){
             followed = false;
           }
 

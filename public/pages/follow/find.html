@@ -4,10 +4,14 @@
 			<div class="col-md-6" ng-repeat="user in vm.users" ng-if="user.uid != vm.currentUserId">
 				<h3>
 					{{user.name}}
-					<button ng-click="vm.follow(user.uid)"  ng-if="!user.isFollowed">
-						{{vm.followed}}
+					<button class="btn btn-primary" ng-click="vm.follow(user.uid)"  ng-if="!user.isFollowed">
 						<div>
 							Follow
+						</div>
+					</button>
+					<button class="btn btn-default" ng-click="vm.unfollow(user.uid)"  ng-if="user.isFollowed">
+						<div>
+							Unfollow
 						</div>
 					</button>
 				</h3>
