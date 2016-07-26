@@ -23,8 +23,7 @@ app.use(bodyParser.json());
 //to tell node there are static folder
 app.use('/public', express.static(__dirname + "/public" ));
 app.use('/node_modules', express.static(__dirname + "/node_modules" ));
-app.use('/uploads', express.static(__dirname + "/uploads" ));
-
+app.use('/uploads', express.static(__dirname + "/server/uploads" ));
 
 //Get the main index file to serve
 app.get('/', function(req, res){
@@ -56,28 +55,15 @@ app.post('/api/bitch/get', bitchController.getBitches);
 
 //user
 app.get('/api/users/get', usersController.getUsers)
+app.get('/api/users/get/:id', usersController.getUserById)
 app.post('/api/users/follow', usersController.followUser)
 app.post('/api/users/unfollow', usersController.unfollowUser)
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-		err.status = 404;
-    next(err);
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// app.use(function(req, res, next) {
+//     var err = new Error('Not Found');
+// 		err.status = 404;
+//     next(err);
+// });
 //

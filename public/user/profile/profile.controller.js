@@ -25,7 +25,8 @@
           }).progress(function(evt){
             console.log('uploading image');
           }).success(function(data) {
-            console.log(data)
+            console.log(data);
+            alert('Image Uploaded Successfully')
           }).error(function(error) {
             console.log(error)
           })
@@ -40,6 +41,16 @@
         vm.uploadFile($scope.file);
       });
 
+
+      vm.getUserProfile = function() {
+        var userId = localStorage.getItem('token');
+        $http.get('/api/users/get/'+userId)
+            .then(function success(response){
+              vm.userProfile = response.data;
+            }, function error(response){
+              console.log(response);
+            })
+      }
 
       vm.updateUsername = function(username) {
         var postData = {
@@ -67,6 +78,11 @@
              }, function error(response){
                console.log(response);
              })
+      }
+
+      vm.updateProfile = function(username, bio) {
+        vm.updateUsername(username)
+        vm.updateBio(bio)
       }
 
 

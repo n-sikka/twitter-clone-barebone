@@ -10,16 +10,11 @@ module.exports.uploadPhoto = function(req, res) {
 
   var newDate = new Date();
   //isostring so we can manipulate date later
-  var uploadDate = newDate.toISOString();
 
-  //remove all junk on date(special chars);
-  uploadDate = uploadDate.replace(".","");
-  uploadDate = uploadDate.replace("-","");
-  uploadDate = uploadDate.replace(":","");
 
   var tmpPath = file.path;
-  var targetPath = path.join(__dirname, "../uploads/" + userId + uploadDate + file.name);
-  var savePath = "/uploads/" + userId + uploadDate + file.name;
+  var targetPath = path.join(__dirname, "../uploads/" + userId + file.name);
+  var savePath = "/uploads/" + userId  + file.name;
 
   fs.rename(tmpPath, targetPath, function(err){
 

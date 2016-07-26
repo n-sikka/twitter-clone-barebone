@@ -27,6 +27,8 @@
               localStorage.setItem('token', response.data._id);
               localStorage.setItem('email', response.data.email);
               localStorage.setItem('user-image', response.data.image);
+              var obj = JSON.stringify(response.data);
+              localStorage.setItem('user', obj);
               var name = response.data.email.substring(0, response.data.email.lastIndexOf("@"));
               localStorage.setItem('username', name);
               location.reload();

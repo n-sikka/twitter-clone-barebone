@@ -1,23 +1,45 @@
 <div class="row">
+  <div class="container text-center">
+    <h2>Edit Profile</h2>
+  </div>
+</div>
+
+<div class="row jumbotron" ng-init="vm.getUserProfile()">
   <div class="container">
     <div class="col-md-12">
       <div class="row">
-        <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
-             ngf-accept="'image/*'">
-             <a href>Select Image</a>
+        <div class="row-fluid">
+          <div class="col-md-2">
+            <img class="img-responsive" ng-src="{{vm.userProfile.image}}" alt="{{vm.userProfile.username | limitTo: 1}}" />
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="col-md-4 text-left container-fluid" style="padding-left:0">
+          <div class="button" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+          ngf-accept="'image/*'" ngf-resize="{width: 500, height: 500}" >
+            <a href class="btn " style="padding-left:0">Select Image</a>
+          </div>
+        </div>
+      </div>
+    <br>
+      <br>
+      <div class="row">
+        <div class="container">
+          <input class="form-control" ng-model="vm.userProfile.username" placeholder="Username"/>
         </div>
       </div>
       <br>
       <div class="row">
-        <input class="form-control" ng-model="user.username" placeholder="Username" ng-blur="vm.updateUsername(user.username)"/>
+        <div class="container">
+          <textarea class="form-control" ng-model="vm.userProfile.bio" placeholder="Your Bio"/>
+        </div>
       </div>
       <br>
       <div class="row">
-        <textarea class="form-control" ng-model="user.bio" placeholder="Your Bio" ng-blur="vm.updateBio(user.bio)"/>
-      </div>
-      <br>
-      <div class="row">
-        <button type="button">Save</button>
+        <div class="container">
+          <button type="button" ng-click="vm.updateProfile(vm.userProfile.username, vm.userProfile.bio)">Save</button>
+        </div>
       </div>
       <br>
     </div>

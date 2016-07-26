@@ -21,11 +21,7 @@ module.exports.login = function(req, res) {
 
       //this has edgecase when user is signin up for the first time.
       //should probably create an onboarding screen for the user and get these datasets.
-      res.json({email: req.body.email,
-                _id: userData._id,
-                userName: userData.userName,
-                image: userData.image
-              });
+      res.json(userData);
     }
   })
 

@@ -80,3 +80,17 @@ module.exports.unfollowUser = function(req, res) {
       }
     })
 }
+
+
+
+module.exports.getUserById = function(req, res) {
+  var userId = req.params.id;
+
+  User.findById(userId, function(err, user){
+    if (err) {
+      console.log(err);
+    } else {
+      res.json(user)
+    }
+  })
+}
